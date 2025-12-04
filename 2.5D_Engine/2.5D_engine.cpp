@@ -327,11 +327,11 @@ void Engine::RenderAllSectorWalls() {
 							imageRender.setPixel(i, j, pixelTab[i * yHeight + j]);
 						}
 					}
-					textureRender.loadFromImage(imageRender);
+					textureRender.update(imageRender);
 					spriteRender.setTexture(textureRender);
 					window->draw(spriteRender);
 					//RenderMinimaps();
-					sf::sleep(sf::milliseconds(200));
+					//sf::sleep(sf::milliseconds(200));
 					window->display();
 					bool bNextStep = false;
 					sf::Event event;
@@ -356,7 +356,7 @@ void Engine::RenderAllSectorWalls() {
 		visitedPortalsSectors[make_pair(currentPortal.fromSectorIndex, currentPortal.fromWallIndex)] = true;
 		Portals.erase(Portals.begin());	
 	}
-	cout << "Portal num : " << nbPortalPerFrame << endl;
+	//cout << "Portal num : " << nbPortalPerFrame << endl;
 }
 
 float Engine::FNCross(float x1, float y1, float x2, float y2) { return (x1 * y2 - y1 * x2); }
@@ -424,7 +424,7 @@ void Engine::Render() {
 	{
 		return;
 	}
-	textureRender.loadFromImage(imageRender);
+	textureRender.update(imageRender);
 	spriteRender.setTexture(textureRender);
 	window->draw(spriteRender);
 	//RenderMinimaps();

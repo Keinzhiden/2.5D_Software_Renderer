@@ -17,6 +17,7 @@ int main() {
 
     sf::Vector2i dirInput;
 
+    engine.textureRender.loadFromImage(engine.imageRender);
     while (window.isOpen())
     {
 
