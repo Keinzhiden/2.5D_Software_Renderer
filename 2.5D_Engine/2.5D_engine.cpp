@@ -260,11 +260,6 @@ struct WallToTreat
 	sf::Color wallColor;
 };
 void Engine::RenderAllSectorWalls() {
-	int nbWallsToTreat = myMap->mapSectors[playerCurrentSector].nbWalls;
-	vector<WallToTreat> wallsToTreat;
-	map<pair<int,int>,bool> visitedPortalsSectors;
-	vector<bool> visitedSectors;
-
 	vector<PortalRender> Portals;
 	PortalRender firstPortalRender;
 	firstPortalRender.sectorIndex = playerCurrentSector;
@@ -272,29 +267,14 @@ void Engine::RenderAllSectorWalls() {
 	firstPortalRender.fromWallIndex = -1;
 	firstPortalRender.portalColor = sf::Color::Black;
 	Portals.push_back(firstPortalRender);
+
 	int nbPortalPerFrame = 0;
 
-	for (int index = 0; index < myMap->nbSectors; index++)
-	{
-		visitedSectors.push_back(false);
-	}
-	for (int i = 0; i < myMap->mapSectors[playerCurrentSector].nbWalls; i++) {
-		WallToTreat wallToTreat;
-		wallToTreat.sectorIndex = playerCurrentSector;
-		wallToTreat.wallIndex = i;
-		wallToTreat.sectorNeighbor = myMap->mapSectors[playerCurrentSector].sectorWalls[i].neighboorValue;
-		wallToTreat.wallColor = myMap->mapSectors[playerCurrentSector].sectorWalls[i].WallColor;
-		wallsToTreat.push_back(wallToTreat);
-		
-		visitedSectors[playerCurrentSector] = true;
-
-	}
-	//bDebugRenderOn = true;
 	while (!Portals.empty())
 	{
 		PortalRender currentPortal = Portals.front();
 		
-		if (currentPortal.sectorIndex != -1 /* && !visitedPortalsSectors[make_pair(currentPortal.fromSectorIndex, currentPortal.fromWallIndex)] == true*/)
+		if (currentPortal.sectorIndex != -1)
 		{
 			for (int i = 0; i < myMap->mapSectors[currentPortal.sectorIndex].nbWalls; i++) {
 				bool bIsWallRendered = false;
@@ -303,9 +283,6 @@ void Engine::RenderAllSectorWalls() {
 				wallToTreat.wallIndex = i;
 				wallToTreat.sectorNeighbor = myMap->mapSectors[currentPortal.sectorIndex].sectorWalls[i].neighboorValue;
 				wallToTreat.wallColor = myMap->mapSectors[currentPortal.sectorIndex].sectorWalls[i].WallColor;
-				//wallsToTreat.push_back(wallToTreat);
-				//visitedWallsSectors[make_pair(playerCurrentSector, i)] = true;
-				//visitedSectors[playerCurrentSector] = true;
 
 				PortalRender newPortalRender;
 				newPortalRender.portalColor = sf::Color(rand()%256, rand() % 256, rand() % 256, 255);
@@ -330,8 +307,7 @@ void Engine::RenderAllSectorWalls() {
 					textureRender.update(imageRender);
 					spriteRender.setTexture(textureRender);
 					window->draw(spriteRender);
-					//RenderMinimaps();
-					//sf::sleep(sf::milliseconds(200));
+
 					window->display();
 					bool bNextStep = false;
 					sf::Event event;
@@ -353,7 +329,6 @@ void Engine::RenderAllSectorWalls() {
 				}
 			}			
 		}
-		visitedPortalsSectors[make_pair(currentPortal.fromSectorIndex, currentPortal.fromWallIndex)] = true;
 		Portals.erase(Portals.begin());	
 	}
 	//cout << "Portal num : " << nbPortalPerFrame << endl;

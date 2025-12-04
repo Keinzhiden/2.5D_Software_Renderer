@@ -5,7 +5,8 @@ int main() {
     const unsigned int xWidth = 1500;
     const unsigned int yHeight = 1000;
     sf::RenderWindow window(sf::VideoMode(xWidth, yHeight), "My 2.5D Engine / SFML");
-
+    window.setVerticalSyncEnabled(false);
+    window.setFramerateLimit(60);
     sf::CircleShape player;
     player.setRadius(10);
     player.setFillColor(sf::Color::Blue);
