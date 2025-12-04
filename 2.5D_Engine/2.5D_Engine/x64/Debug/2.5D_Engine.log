@@ -1,0 +1,78 @@
+﻿  2.5D_engine.cpp
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(56,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(71,64): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(72,63): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(73,76): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(73,76): warning C4244:         with
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(73,76): warning C4244:         [
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(73,76): warning C4244:             T=float
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(73,76): warning C4244:         ]
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(74,78): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(74,78): warning C4244:         with
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(74,78): warning C4244:         [
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(74,78): warning C4244:             T=float
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(74,78): warning C4244:         ]
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(105,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(109,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(116,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(120,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(157,15): warning C4244: 'initializing': conversion from 'T' to 'long', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(157,15): warning C4244:         with
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(157,15): warning C4244:         [
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(157,15): warning C4244:             T=float
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(157,15): warning C4244:         ]
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(160,15): warning C4244: 'initializing': conversion from 'T' to 'long', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(160,15): warning C4244:         with
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(160,15): warning C4244:         [
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(160,15): warning C4244:             T=float
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(160,15): warning C4244:         ]
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(327,25): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(328,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(339,16): warning C4101: 'event': unreferenced local variable
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(386,137): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(386,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(411,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(412,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(420,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(421,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(463,50): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(463,50): warning C4244:         with
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(463,50): warning C4244:         [
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(463,50): warning C4244:             T=float
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(463,50): warning C4244:         ]
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(464,50): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(464,50): warning C4244:         with
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(464,50): warning C4244:         [
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(464,50): warning C4244:             T=float
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(464,50): warning C4244:         ]
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(467,49): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(467,49): warning C4244:         with
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(467,49): warning C4244:         [
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(467,49): warning C4244:             T=float
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(467,49): warning C4244:         ]
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(468,49): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(468,49): warning C4244:         with
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(468,49): warning C4244:         [
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(468,49): warning C4244:             T=float
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(468,49): warning C4244:         ]
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(471,67): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(471,67): warning C4244:         with
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(471,67): warning C4244:         [
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(471,67): warning C4244:             T=float
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(471,67): warning C4244:         ]
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(472,67): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(472,67): warning C4244:         with
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(472,67): warning C4244:         [
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(472,67): warning C4244:             T=float
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(472,67): warning C4244:         ]
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(475,68): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(475,68): warning C4244:         with
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(475,68): warning C4244:         [
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(475,68): warning C4244:             T=float
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(475,68): warning C4244:         ]
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(476,68): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(476,68): warning C4244:         with
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(476,68): warning C4244:         [
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(476,68): warning C4244:             T=float
+C:\Users\rouyr\source\repos\2.5D_Engine\2.5D_engine.cpp(476,68): warning C4244:         ]
+  2.5D_Engine.vcxproj -> C:\Users\rouyr\source\repos\2.5D_Engine\x64\Debug\2.5D_Engine.exe
