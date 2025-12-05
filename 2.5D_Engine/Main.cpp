@@ -2,9 +2,10 @@
 
 int main() {
 
-    const unsigned int xWidth = 1500;
-    const unsigned int yHeight = 1000;
+    const unsigned int xWidth = 1920;
+    const unsigned int yHeight = 1080;
     sf::RenderWindow window(sf::VideoMode(xWidth, yHeight), "My 2.5D Engine / SFML");
+    window.setPosition(sf::Vector2i{ -10,-10 });
     window.setVerticalSyncEnabled(false);
     window.setFramerateLimit(60);
     sf::CircleShape player;
@@ -19,6 +20,8 @@ int main() {
     sf::Vector2i dirInput;
 
     engine.textureRender.loadFromImage(engine.imageRender);
+    sf::Clock clock;
+        
     while (window.isOpen())
     {
 
@@ -74,6 +77,10 @@ int main() {
             engine.movePlayerOnInput(dirInput);
             //engine.WallDraw();
             engine.Render();
+            sf::Time elapsed = clock.restart();
+
+            cout << "Delta : " << elapsed.asMilliseconds() << " | " << (1000/ elapsed.asMilliseconds()) << endl;
+            
             //window.draw(spriteToDraw);
             //window.display();
             

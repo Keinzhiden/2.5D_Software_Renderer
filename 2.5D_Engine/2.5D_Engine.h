@@ -15,6 +15,7 @@ struct PortalRender
 	int fromSectorIndex = -1;
 	sf::Color portalColor = sf::Color::Black;
 
+	sf::Vector2i xLimits;
 };
 
 class Engine {
@@ -38,8 +39,9 @@ public:
 	sf::Vertex LinesDirVisionTransformedMinimap [2];
 
 	const unsigned int minimapScale = 4;
-	const unsigned int xWidth = 1500;
-	const unsigned int yHeight = 1000;
+	unsigned int xWidth = 1500;
+	unsigned int yHeight = 1000;
+	int resolutionFactor = 2;
 
 	static const unsigned int nbVertices = 6;
 	static const unsigned int nbVData = 2;
@@ -64,7 +66,7 @@ public:
 
 	float FNCross(float x1, float y1, float x2, float y2);
 	void CalcTranformAndRotatedWall(int sectorIndex, int wallIndex);
-	void CalcPerspectiveWall(int sectorIndex, int wallIndex,sf::Color wallColor, bool& bwasRendered, sf::Color portalColor, sf::Color newPortalColor);
+	void CalcPerspectiveWall(int sectorIndex, int wallIndex,sf::Color wallColor, bool& bwasRendered,PortalRender currentPortal,PortalRender& newPortal);
 	void RenderAllSectorWalls();
 	void WallDraw();
 	void vline(int x, int y1, int y2, int top, int middle, int bottom, sf::Color col, sf::Color portalColor);
