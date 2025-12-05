@@ -33,6 +33,14 @@ Engine::Engine(sf::RenderWindow& actualwindow) {
 
 	window = &actualwindow;
 
+	window->setMouseCursorVisible(false);
+	window->setVerticalSyncEnabled(true);
+	window->setKeyRepeatEnabled(false);
+	window->setFramerateLimit(90);
+	const auto desktop = sf::VideoMode::getDesktopMode();
+	window->setPosition({ static_cast<int>(desktop.width / 2 - window->getSize().x / 2),
+					   static_cast<int>(desktop.height / 2 - window->getSize().y / 2) });
+
 	xWidth = window->getSize().x/resolutionFactor;
 	yHeight = window->getSize().y/resolutionFactor;
 
@@ -452,8 +460,8 @@ void Engine::movePlayerOnInput(sf::Vector2i dir) {
 		movement.x += -cos((90.0 + (double)playerVisionAngle) * PI / 180)/3;
 		movement.y += -sin((90.0 + (double)playerVisionAngle) * PI / 180)/3;
 	}
-	movement.x *= 3;
-	movement.y *= 3;
+	movement.x *= 1;
+	movement.y *= 1;
 	if (movement.x != 0 || movement.y != 0)updatePlayerSector(movement);
 	playerPosition.x += movement.x;
 	playerPosition.y += movement.y;
