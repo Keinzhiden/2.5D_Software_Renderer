@@ -226,31 +226,46 @@ void Engine::CalcPerspectiveWall(int sectorIndex, int wallIndex,sf::Color wallCo
 			{
 				/* Acquire the Y coordinates for our ceiling & floor for this X coordinate. Clamp them. */
 				int ya = (x - x1) * (y2a - y1a) / (x2 - x1) + y1a;
-				int cya = clamp(ya, 0, yHeight - 1); // top
+				int cya = clamp(ya, currentPortal.yLimits.x, currentPortal.yLimits.y - 1); // top
+				//int cya = clamp(ya, 0, yHeight - 1); // top
 				int yb = (x - x1) * (y2b - y1b) / (x2 - x1) + y1b;
-				int cyb = clamp(yb, 0, yHeight - 1); // bottom
+				int cyb = clamp(yb, currentPortal.yLimits.x, currentPortal.yLimits.y - 1); // bottom
+				//int cyb = clamp(yb, 0, yHeight - 1); // bottom
+				
+				int beginy = currentPortal.yLimits.x;
+				//int beginy = 0;
+				int endy = currentPortal.yLimits.y;
+				//int endy = yHeight;
 
+				if (newPortal.yLimits.x > cya)
+				{
+					newPortal.yLimits.x = cya;
+				}
+				if (newPortal.yLimits.y < cyb)
+				{
+					newPortal.yLimits.y = cyb;
+				}
 				/* Render ceiling: everything above this sector's ceiling height. */
-				vline(x, 0, cya , 0x111111, 0x222222, 0x111111, (myMap->mapSectors[sectorIndex].floorColor), currentPortalColor);
+				vline(x, beginy, cya , 0x111111, 0x222222, 0x111111, (myMap->mapSectors[sectorIndex].floorColor), currentPortalColor);
 				/* Render floor: everything below this sector's floor height. */
-				vline(x, cyb , yHeight, 0x0000FF, 0x0000AA, 0x0000FF, myMap->mapSectors[sectorIndex].floorColor + sf::Color(40, 40, 40, 0), currentPortalColor);
+				vline(x, cyb , endy, 0x0000FF, 0x0000AA, 0x0000FF, myMap->mapSectors[sectorIndex].floorColor + sf::Color(40, 40, 40, 0), currentPortalColor);
 				if (neighbor >= 0)
 				{
 					/* Same for _their_ floor and ceiling */
 					
 					int nya = (x - x1) * (ny2a - ny1a) / (x2 - x1) + ny1a;
-					int cnya = clamp(nya, 0, yHeight -1);
+					int cnya = clamp(nya, beginy, endy );
 					int nyb = (x - x1) * (ny2b - ny1b) / (x2 - x1) + ny1b;
-					int cnyb = clamp(nyb, 0, yHeight -1);
+					int cnyb = clamp(nyb, beginy, endy );
 					//cout << "(Ceil) cya :" << cya << "  (NCeil) :" << cnya << endl;
 					//cout << "(Floor )cyb :" << cyb << "  (NFloor) :" << cnyb << endl;
 					/* If our ceiling is higher than their ceiling, render upper wall */
 					//unsigned r1 = 0x010101 * (255 - z), r2 = 0x040007 * (31 - z / 8);
-					vline(x, cya, cnya-1 ,0,0,0, myMap->mapSectors[neighbor].floorColor - sf::Color(40, 40, 40, 0), currentPortalColor); // Between our and their ceiling
+					vline(x, cya, cnya ,0,0,0, myMap->mapSectors[neighbor].floorColor - sf::Color(40, 40, 40, 0), currentPortalColor); // Between our and their ceiling
 					//ytop[x] = clamp(max(cya, cnya), ytop[x], H - 1);   // Shrink the remaining window below these ceilings
 					/* If our floor is lower than their floor, render bottom wall */
 
-					vline(x, cnyb , cyb+1, 0,0,0, myMap->mapSectors[neighbor].floorColor + sf::Color(20, 20, 20, 0), currentPortalColor); // Between their and our floor
+					vline(x, cnyb , cyb, 0,0,0, myMap->mapSectors[neighbor].floorColor + sf::Color(20, 20, 20, 0), currentPortalColor); // Between their and our floor
 
 					vline(x, cnya, cnyb, 0, 0, 0, newPortalColor, currentPortalColor);
 					bwasRendered = true;
@@ -289,6 +304,8 @@ void Engine::RenderAllSectorWalls() {
 	firstPortalRender.portalColor = sf::Color::Black;
 	firstPortalRender.xLimits.x = 0;
 	firstPortalRender.xLimits.y = xWidth;
+	firstPortalRender.yLimits.x = 0;
+	firstPortalRender.yLimits.y = yHeight;
 	Portals.push_back(firstPortalRender);
 
 	int nbPortalPerFrame = 0;
@@ -312,6 +329,8 @@ void Engine::RenderAllSectorWalls() {
 				newPortalRender.sectorIndex = wallToTreat.sectorNeighbor;
 				newPortalRender.fromSectorIndex = currentPortal.sectorIndex;
 				newPortalRender.fromWallIndex = i;
+				newPortalRender.yLimits.x = currentPortal.yLimits.y;
+				newPortalRender.yLimits.y = currentPortal.yLimits.x;
 
 				CalcTranformAndRotatedWall(wallToTreat.sectorIndex, wallToTreat.wallIndex);
 				CalcPerspectiveWall(wallToTreat.sectorIndex, wallToTreat.wallIndex, wallToTreat.wallColor, bIsWallRendered, currentPortal,newPortalRender);
@@ -389,16 +408,11 @@ void Engine::RenderMinimaps() {
 	window->draw(playerMinimap);
 	window->draw(WallsLines, 2, sf::Lines);
 
-	
-
 	window->draw(LinesDirVisionTransformedMinimap, 2, sf::Lines);
 	window->draw(playerTransformedDirMinimap);
 	window->draw(playerTransformedMinimap);
 	window->draw(WallsTransformedLines, 2, sf::Lines);
-	
-	
 
-	
 }
 
 void Engine::Render() {
@@ -426,8 +440,7 @@ void Engine::Render() {
 	spriteRender.setScale(sf::Vector2f{ (float)resolutionFactor,(float)resolutionFactor });
 	window->draw(spriteRender);
 	//RenderMinimaps();
-	window->display();
-	
+	window->display();	
 }
 
 
@@ -466,16 +479,20 @@ void Engine::movePlayerOnInput(sf::Vector2i dir) {
 	playerPosition.x += movement.x;
 	playerPosition.y += movement.y;
 }
-void Engine::updatePlayerSector(sf::Vector2f movement) {
+void Engine::updatePlayerSector(sf::Vector2f& movement) {
 	for (auto i = 0; i < myMap->mapSectors[playerCurrentSector].nbWalls;i++) {
 		bool isClockWise = false;
+		int neighboorValue = myMap->mapSectors[playerCurrentSector].sectorWalls[i].neighboorValue;
 		if (doIntersect(sf::Vector2f{ playerPosition.x,playerPosition.y }, sf::Vector2f{ playerPosition.x + movement.x,playerPosition.y + movement.y },
 			myMap->mapSectors[playerCurrentSector].sectorWalls[i].Vertices[0], myMap->mapSectors[playerCurrentSector].sectorWalls[i].Vertices[1],isClockWise)) {
 			if (myMap->mapSectors[playerCurrentSector].sectorWalls[i].neighboorValue != -1 && isClockWise) {
 				int neighboorValue = myMap->mapSectors[playerCurrentSector].sectorWalls[i].neighboorValue;
 				playerPosition.z = playerPosition.z - (myMap->mapSectors[playerCurrentSector].FloorHeight - myMap->mapSectors[neighboorValue].FloorHeight);
 				playerCurrentSector = neighboorValue;
-				
+			}
+			else if (neighboorValue == -1)
+			{
+				movement = { 0,0 };
 			}
 
 			break;

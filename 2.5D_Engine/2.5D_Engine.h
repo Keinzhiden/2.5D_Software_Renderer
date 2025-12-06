@@ -16,6 +16,8 @@ struct PortalRender
 	sf::Color portalColor = sf::Color::Black;
 
 	sf::Vector2i xLimits;
+	sf::Vector2i yLimits;
+	sf::Vector2i yBottomLimits;
 };
 
 class Engine {
@@ -39,8 +41,8 @@ public:
 	sf::Vertex LinesDirVisionTransformedMinimap [2];
 
 	const unsigned int minimapScale = 4;
-	unsigned int xWidth = 1500;
-	unsigned int yHeight = 1000;
+	unsigned int xWidth = 750;
+	unsigned int yHeight = 500;
 	int resolutionFactor = 2;
 
 	static const unsigned int nbVertices = 6;
@@ -84,7 +86,7 @@ public:
 	void rotatePlayerOnMouse(sf::Vector2i mousePos, sf::RenderWindow& window);
 
 	void movePlayerOnInput(sf::Vector2i dir);
-	void updatePlayerSector(sf::Vector2f movement);
+	void updatePlayerSector(sf::Vector2f& movement);
 
 	bool bDebugRenderOn = false;
 	#define hfov (0.73f*xWidth)
