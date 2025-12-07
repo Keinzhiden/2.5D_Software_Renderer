@@ -1,6 +1,7 @@
 #pragma once 
 #include "2.5D_Engine.h"
 #include <time.h>
+#include <SFML/Graphics.hpp>
 
 /*
 ' Acquire the x,y coordinates of these two vertexes
@@ -36,7 +37,7 @@ Engine::Engine(sf::RenderWindow& actualwindow) {
 	window->setMouseCursorVisible(false);
 	window->setVerticalSyncEnabled(true);
 	window->setKeyRepeatEnabled(false);
-	window->setFramerateLimit(90);
+	window->setFramerateLimit(120);
 	const auto desktop = sf::VideoMode::getDesktopMode();
 	window->setPosition({ static_cast<int>(desktop.width / 2 - window->getSize().x / 2),
 					   static_cast<int>(desktop.height / 2 - window->getSize().y / 2) });
@@ -47,8 +48,19 @@ Engine::Engine(sf::RenderWindow& actualwindow) {
 	playerPosition.x = 50;
 	playerPosition.y = 100;
 	playerPosition.z = 4;
+	
+	if(!font.loadFromFile("./ressources/tuffy.ttf"))
+	{ 
+		cout << "Erreur loading font" << endl;
+		exit( - 1);
+	}
 
-
+	fpsInfos.setPosition(5.0f, 5.0f);
+	fpsInfos.setCharacterSize(15);
+	fpsInfos.setFillColor(sf::Color::White);
+	fpsInfos.setStyle(sf::Text::Bold);
+	fpsInfos.setFont(font);
+	
 	imageRender.create(xWidth, yHeight, sf::Color::Black);
 
 	pixelTab = new sf::Color[int((double)xWidth * (double)yHeight)];
@@ -453,6 +465,15 @@ void Engine::Render() {
 	spriteRender.setTexture(textureRender);
 	spriteRender.setScale(sf::Vector2f{ (float)resolutionFactor,(float)resolutionFactor });
 	window->draw(spriteRender);
+
+	sf::Time elapsed = clock.restart();
+	currentUiDelay += elapsed.asMilliseconds();
+	if (currentUiDelay > updateUiDelay)
+	{
+		fpsInfos.setString("FPS : " + to_string(1000 / elapsed.asMilliseconds()) + "\n" + "Delta Time : " + to_string(elapsed.asMilliseconds()));
+		currentUiDelay = 0;
+	}
+	window->draw(fpsInfos);
 	//RenderMinimaps();
 	window->display();	
 }

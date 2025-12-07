@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Text.hpp>
 #include <iostream>
 #include <chrono>
 #include "Map.h"
@@ -45,6 +46,13 @@ public:
 	unsigned int yHeight = 500;
 	int resolutionFactor = 2;
 
+	sf::Clock clock;
+
+	sf::Text fpsInfos;
+	sf::Font font;
+
+	float updateUiDelay = 500;
+	float currentUiDelay = 0;
 	static const unsigned int nbVertices = 6;
 	static const unsigned int nbVData = 2;
 	sf::Vector2f vertices[nbVertices];

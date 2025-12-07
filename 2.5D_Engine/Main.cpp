@@ -2,7 +2,6 @@
 
 int main() {
 
-    //28 fps 1500 1000
     const unsigned int xWidth = 1500;
     const unsigned int yHeight = 1000;
     //sf::RenderWindow window(sf::VideoMode(xWidth, yHeight), "My 2.5D Engine / SFML");
@@ -96,7 +95,7 @@ int main() {
         engine.Render();
         sf::Time elapsed = clock.restart();
 
-        cout << "Delta : " << elapsed.asMilliseconds() << " | " << (1000 / elapsed.asMilliseconds()) << endl;
+        //cout << "Delta : " << elapsed.asMilliseconds() << " | " << (1000 / elapsed.asMilliseconds()) << endl;
         //cout << "Yaw : " << engine.playerYaw << endl;
     }
 }
