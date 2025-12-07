@@ -50,6 +50,7 @@ public:
 	sf::Vector2f vertices[nbVertices];
 
 	sf::Color* pixelTab = nullptr;
+	sf::Vector2i* yLimitsTab = nullptr;
 
 	double PI = 3.141592653589793238462643383279502884;
 

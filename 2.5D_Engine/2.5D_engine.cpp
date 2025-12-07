@@ -52,6 +52,7 @@ Engine::Engine(sf::RenderWindow& actualwindow) {
 	imageRender.create(xWidth, yHeight, sf::Color::Black);
 
 	pixelTab = new sf::Color[int((double)xWidth * (double)yHeight)];
+	yLimitsTab = new sf::Vector2i[xWidth];
 
 	playerMinimap.setFillColor(sf::Color::Blue);
 	playerDirMinimap.setFillColor(sf::Color::Blue);
@@ -68,6 +69,7 @@ Engine::Engine(sf::RenderWindow& actualwindow) {
 
 Engine::~Engine() {
 	delete[] pixelTab;
+	delete[] yLimitsTab;
 	//delete mysector;
 	//	delete window;
 	delete myMap;
@@ -209,14 +211,16 @@ void Engine::CalcPerspectiveWall(int sectorIndex, int wallIndex,sf::Color wallCo
 			{
 				return;
 			}
+			
+
+			beginx = (int)fmax(x1, currentPortal.xLimits.x);
+			endx = (int)fmin(x2, currentPortal.xLimits.y);
+
 			if (neighbor >= 0)
 			{
 				newPortal.xLimits.x = beginx;
 				newPortal.xLimits.y = endx;
 			}
-
-			beginx = (int)fmax(x1, currentPortal.xLimits.x);
-			endx = (int)fmin(x2, currentPortal.xLimits.y);
 			//std::cout << "\x1B[2J\x1B[H";
 			
 			//beginx = (int)fmin(x1, x2);
@@ -224,12 +228,14 @@ void Engine::CalcPerspectiveWall(int sectorIndex, int wallIndex,sf::Color wallCo
 
 			for (int x = beginx; x < endx; ++x)
 			{
+				sf::Vector2i yLimit = yLimitsTab[x];
+				//sf::Vector2i yLimit = currentPortal.yLimits;
 				/* Acquire the Y coordinates for our ceiling & floor for this X coordinate. Clamp them. */
 				int ya = (x - x1) * (y2a - y1a) / (x2 - x1) + y1a;
-				int cya = clamp(ya, currentPortal.yLimits.x, currentPortal.yLimits.y - 1); // top
+				int cya = clamp(ya, yLimit.x, yLimit.y); // top
 				//int cya = clamp(ya, 0, yHeight - 1); // top
 				int yb = (x - x1) * (y2b - y1b) / (x2 - x1) + y1b;
-				int cyb = clamp(yb, currentPortal.yLimits.x, currentPortal.yLimits.y - 1); // bottom
+				int cyb = clamp(yb, yLimit.x, yLimit.y); // bottom
 				//int cyb = clamp(yb, 0, yHeight - 1); // bottom
 				
 				int beginy = currentPortal.yLimits.x;
@@ -237,26 +243,25 @@ void Engine::CalcPerspectiveWall(int sectorIndex, int wallIndex,sf::Color wallCo
 				int endy = currentPortal.yLimits.y;
 				//int endy = yHeight;
 
-				if (newPortal.yLimits.x > cya)
-				{
-					newPortal.yLimits.x = cya;
-				}
-				if (newPortal.yLimits.y < cyb)
-				{
-					newPortal.yLimits.y = cyb;
-				}
 				/* Render ceiling: everything above this sector's ceiling height. */
-				vline(x, beginy, cya , 0x111111, 0x222222, 0x111111, (myMap->mapSectors[sectorIndex].floorColor), currentPortalColor);
+				vline(x, yLimit.x, cya , 0x111111, 0x222222, 0x111111, (myMap->mapSectors[sectorIndex].floorColor), currentPortalColor);
 				/* Render floor: everything below this sector's floor height. */
-				vline(x, cyb , endy, 0x0000FF, 0x0000AA, 0x0000FF, myMap->mapSectors[sectorIndex].floorColor + sf::Color(40, 40, 40, 0), currentPortalColor);
+				vline(x, cyb , yLimit.y, 0x0000FF, 0x0000AA, 0x0000FF, myMap->mapSectors[sectorIndex].floorColor + sf::Color(40, 40, 40, 0), currentPortalColor);
 				if (neighbor >= 0)
 				{
 					/* Same for _their_ floor and ceiling */
-					
+					if (newPortal.yLimits.x > cya)
+					{
+						newPortal.yLimits.x = cya;
+					}
+					if (newPortal.yLimits.y < cyb)
+					{
+						newPortal.yLimits.y = cyb;
+					}
 					int nya = (x - x1) * (ny2a - ny1a) / (x2 - x1) + ny1a;
-					int cnya = clamp(nya, beginy, endy );
+					int cnya = clamp(nya, yLimit.x, yLimit.y );
 					int nyb = (x - x1) * (ny2b - ny1b) / (x2 - x1) + ny1b;
-					int cnyb = clamp(nyb, beginy, endy );
+					int cnyb = clamp(nyb, yLimit.x, yLimit.y );
 					//cout << "(Ceil) cya :" << cya << "  (NCeil) :" << cnya << endl;
 					//cout << "(Floor )cyb :" << cyb << "  (NFloor) :" << cnyb << endl;
 					/* If our ceiling is higher than their ceiling, render upper wall */
@@ -267,12 +272,16 @@ void Engine::CalcPerspectiveWall(int sectorIndex, int wallIndex,sf::Color wallCo
 
 					vline(x, cnyb , cyb, 0,0,0, myMap->mapSectors[neighbor].floorColor + sf::Color(20, 20, 20, 0), currentPortalColor); // Between their and our floor
 
-					vline(x, cnya, cnyb, 0, 0, 0, newPortalColor, currentPortalColor);
+					yLimitsTab[x].x = fmax(cya,cnya);
+					yLimitsTab[x].y = fmin(cyb,cnyb);
+					//vline(x, cnya, cnyb, 0, 0, 0, newPortalColor, currentPortalColor);
 					bwasRendered = true;
 					//ybottom[x] = clamp(min(cyb, cnyb), 0, ybottom[x]); // Shrink the remaining window above these floors
 				}
 				else {
 					vline(x, cya, cyb, 0, 0, 0, wallColor, currentPortalColor);
+					yLimitsTab[x].x = -1;
+					yLimitsTab[x].y = -1;
 					bwasRendered = false;
 				}	
 			}
@@ -424,6 +433,11 @@ void Engine::Render() {
 		}
 	}
 
+	for (auto i = 0; i < xWidth; i++) {
+		yLimitsTab[i].x = 0;
+		yLimitsTab[i].y = yHeight;
+	}
+
 	RenderAllSectorWalls();
 
 	for (auto i = 0; i < xWidth; i++) {
@@ -450,7 +464,7 @@ void Engine::vline(int x, int y1, int y2, int top, int middle, int bottom,sf::Co
 	y2 = clamp(y2, 0, yHeight - 1);
 
 	for (int y = y1 ; y < y2; ++y) {
-		if(pixelTab[x * yHeight + y] == portalColor)
+		//if(pixelTab[x * yHeight + y] == portalColor)
 		pixelTab[x * yHeight + y] = col;
 	}
 }
@@ -503,22 +517,13 @@ void Engine::updatePlayerSector(sf::Vector2f& movement) {
 void Engine::rotatePlayerOnMouse(sf::Vector2i mousePos, sf::RenderWindow& window) {
 	sf::Vector2i centerScreenPos = { (int)xWidth * resolutionFactor / 2,(int)yHeight * resolutionFactor / 2 };
 	if (mousePos.x != centerScreenPos.x) {
-		if (mousePos.x > centerScreenPos.x) {
-			playerVisionAngle = playerVisionAngle + float((mousePos.x - centerScreenPos.x)) / 10;
-		}
-		else {
-			playerVisionAngle = playerVisionAngle + float((mousePos.x - centerScreenPos.x)) / 10;
-		}		
+			playerVisionAngle = playerVisionAngle + float((mousePos.x - centerScreenPos.x)) / 10;		
 	}
 
 	if (mousePos.y != centerScreenPos.y) {
-		if (mousePos.y > centerScreenPos.y) {
-			playerYaw = playerYaw + float(float(mousePos.y - centerScreenPos.y) / 100);
-		}
-		else {
-			playerYaw = playerYaw + float(float(mousePos.y - centerScreenPos.y) / 100);
-		}
+		playerYaw = playerYaw + float(float(mousePos.y - centerScreenPos.y) / 200);
+		playerYaw = fmax(playerYaw, -4.f);
+		playerYaw = fmin(playerYaw, 4.f);
 	}
-
 	sf::Mouse::setPosition(centerScreenPos, window);
 }

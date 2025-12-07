@@ -2,10 +2,11 @@
 
 int main() {
 
+    //28 fps 1500 1000
     const unsigned int xWidth = 1500;
     const unsigned int yHeight = 1000;
-    sf::RenderWindow window(sf::VideoMode(xWidth, yHeight), "My 2.5D Engine / SFML");
-    //sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width ,sf::VideoMode::getDesktopMode().height,32), "2.5_Renderer", sf::Style::Fullscreen);
+    //sf::RenderWindow window(sf::VideoMode(xWidth, yHeight), "My 2.5D Engine / SFML");
+    sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width ,sf::VideoMode::getDesktopMode().height,32), "2.5_Renderer", sf::Style::Fullscreen);
     //window.setPosition(sf::Vector2i{ -10,-10 });
 
     sf::CircleShape player;
@@ -96,6 +97,6 @@ int main() {
         sf::Time elapsed = clock.restart();
 
         cout << "Delta : " << elapsed.asMilliseconds() << " | " << (1000 / elapsed.asMilliseconds()) << endl;
-
+        //cout << "Yaw : " << engine.playerYaw << endl;
     }
 }
