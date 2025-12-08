@@ -36,7 +36,7 @@ void Map::ReadandProcessMapFile()
 	mapSectors[0].sectorWalls = new Wall[mapSectors[0].nbWalls]{
 		Wall(sf::Vector2f{ 30,80 }, sf::Vector2f{ 130,50 }, sf::Color::Red, 2),
 		Wall(sf::Vector2f{ 130,50 }, sf::Vector2f{ 130,130 }, sf::Color::Red, 1),
-		Wall(sf::Vector2f{ 130,130 }, sf::Vector2f{ 100,150 }, sf::Color::Magenta, -1),
+		Wall(sf::Vector2f{ 130,130 }, sf::Vector2f{ 100,150 }, sf::Color::White, -1),
 		Wall(sf::Vector2f{ 100,150 }, sf::Vector2f{ 0,100 }, sf::Color::Yellow, -1),
 		Wall(sf::Vector2f{ 0,100 }, sf::Vector2f{ 30,80 }, sf::Color::Green, 3)
 	};
@@ -45,7 +45,7 @@ void Map::ReadandProcessMapFile()
 
 	mapSectors[1].sectorWalls = new Wall[mapSectors[1].nbWalls]{
 		Wall(sf::Vector2f{ 130,50 }, sf::Vector2f{ 165,90 }, sf::Color::White, -1),
-		Wall(sf::Vector2f{ 165,90 }, sf::Vector2f{ 130,130 }, sf::Color::Magenta, -1),
+		Wall(sf::Vector2f{ 165,90 }, sf::Vector2f{ 130,130 }, sf::Color::White, -1),
 		Wall(sf::Vector2f{ 130,130 }, sf::Vector2f{ 130,50 }, sf::Color::Red, 0)
 	};
 	mapSectors[1].floorColor = sf::Color{ 100,60,190,255 };
@@ -55,14 +55,14 @@ void Map::ReadandProcessMapFile()
 		Wall(sf::Vector2f{ 30,45 }, sf::Vector2f{ 30,35 }, sf::Color::Yellow, 7),
 		Wall(sf::Vector2f{ 30,35 }, sf::Vector2f{ 30,15 }, sf::Color::Yellow, 8),
 		Wall(sf::Vector2f{ 30,15 }, sf::Vector2f{ 130,15 }, sf::Color::Yellow, -1),
-		Wall(sf::Vector2f{ 130,15 }, sf::Vector2f{ 130,50 }, sf::Color::Magenta, -1),
+		Wall(sf::Vector2f{ 130,15 }, sf::Vector2f{ 130,50 }, sf::Color::Yellow, -1),
 		Wall(sf::Vector2f{ 130,50 }, sf::Vector2f{ 30,80 }, sf::Color::Red, 0),
 	};
 
 	mapSectors[2].floorColor = sf::Color{ 0,0,190,255 };
 
 	mapSectors[3].sectorWalls = new Wall[mapSectors[3].nbWalls]{
-		Wall(sf::Vector2f{ 30,80 },sf::Vector2f{ 0,100 }, sf::Color::Green, 0),
+		Wall(sf::Vector2f{ 30,80 },sf::Vector2f{ 0,100 }, sf::Color::Yellow, 0),
 		Wall(sf::Vector2f{ 0,100 }, sf::Vector2f{ 0,80 }, sf::Color::Green, -1),
 		Wall(sf::Vector2f{ 0,80 }, sf::Vector2f{ 30,80 }, sf::Color::Green, 4),
 	};

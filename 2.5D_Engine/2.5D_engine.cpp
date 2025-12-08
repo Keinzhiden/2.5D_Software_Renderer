@@ -37,7 +37,7 @@ Engine::Engine(sf::RenderWindow& actualwindow) {
 	window->setMouseCursorVisible(false);
 	window->setVerticalSyncEnabled(true);
 	window->setKeyRepeatEnabled(false);
-	window->setFramerateLimit(120);
+	//window->setFramerateLimit(120);
 	const auto desktop = sf::VideoMode::getDesktopMode();
 	window->setPosition({ static_cast<int>(desktop.width / 2 - window->getSize().x / 2),
 					   static_cast<int>(desktop.height / 2 - window->getSize().y / 2) });
@@ -49,11 +49,12 @@ Engine::Engine(sf::RenderWindow& actualwindow) {
 	playerPosition.y = 100;
 	playerPosition.z = 4;
 	
-	if(!font.loadFromFile("./ressources/tuffy.ttf"))
+	if (!font.loadFromFile("ressources/tuffy.ttf"))
 	{ 
 		cout << "Erreur loading font" << endl;
 		exit( - 1);
 	}
+	
 
 	fpsInfos.setPosition(5.0f, 5.0f);
 	fpsInfos.setCharacterSize(15);
@@ -441,7 +442,7 @@ void Engine::Render() {
 	
 	for (auto i = 0; i < xWidth; i++) {
 		for (auto j = 0; j < yHeight; j++) {
-			pixelTab[i * yHeight + j] = sf::Color::Black;
+			pixelTab[i * yHeight + j] = sf::Color::Magenta;
 		}
 	}
 
