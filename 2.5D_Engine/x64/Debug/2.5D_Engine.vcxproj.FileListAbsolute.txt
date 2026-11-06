@@ -1,2 +1,0 @@
-C:\Users\rouyr\source\repos\2.5D_Engine\x64\Debug\2.5D_Engine.exe
-C:\Users\rouyr\source\repos\2.5D_Engine\x64\Debug\2.5D_Engine.pdb
