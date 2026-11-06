@@ -1,4 +1,5 @@
 #pragma once 
+#include "EmbeddedFont.h"
 #include "2.5D_Engine.h"
 #include <time.h>
 #include <SFML/Graphics.hpp>
@@ -49,7 +50,7 @@ Engine::Engine(sf::RenderWindow& actualwindow) {
 	playerPosition.y = 100;
 	playerPosition.z = 4;
 	
-	if (!font.loadFromFile("ressources/tuffy.ttf"))
+	if (!font.loadFromMemory(kTuffyTtf, sizeof(kTuffyTtf)))
 	{ 
 		cout << "Erreur loading font" << endl;
 		exit( - 1);
